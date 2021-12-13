@@ -11,6 +11,8 @@ function App() {
   if (number !== "") {
     if (tIngresada === "Mensual") {
       tasaEA = ((1 + number / 100) ** 12 - 1) * 100;
+    } else if (tIngresada === "Bimestral") {
+      tasaEA = ((1 + number / 100) ** 6 - 1) * 100;
     } else if (tIngresada === "Trimestral") {
       tasaEA = ((1 + number / 100) ** 4 - 1) * 100;
     } else if (tIngresada === "Semestral") {
@@ -23,6 +25,8 @@ function App() {
   if (number !== "" && tasaEA !== "") {
     if (tSalida === "Mensual") {
       resultado = ((1 + tasaEA / 100) ** (1 / 12) - 1) * 100;
+    } else if (tSalida === "Bimestral") {
+      resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100;
     } else if (tSalida === "Trimestral") {
       resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 100;
     } else if (tSalida === "Semestral") {
@@ -60,6 +64,7 @@ function App() {
             Seleccione
           </option>
           <option>Mensual</option>
+          <option>Bimestral</option>
           <option>Trimestral</option>
           <option>Semestral</option>
           <option>Anual</option>
@@ -74,6 +79,7 @@ function App() {
             Seleccione
           </option>
           <option>Mensual</option>
+          <option>Bimestral</option>
           <option>Trimestral</option>
           <option>Semestral</option>
           <option>Anual</option>
