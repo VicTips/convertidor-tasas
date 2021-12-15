@@ -52,7 +52,7 @@ function App() {
   return (
     <div className="d-flex justify-content-center screen-full">
       <div className="bg-light p-5 d-flex flex-column my-auto shadow">
-        <img src={logo} alt="Logo VicTips" className="mb-3"/>
+        <img src={logo} alt="Logo VicTips" className="mb-3" />
         <span>Ingrese la tasa de interés</span>
         <div className="input-group mb-3">
           <input
@@ -67,10 +67,11 @@ function App() {
 
         <span>Tipo de tasa ingresada</span>
         <select
+          defaultValue={1}
           onChange={(e) => setTIngresada(e.target.value)}
           className="form-select mb-3"
         >
-          <option disabled selected>
+          <option disabled hidden value={1}>
             Seleccione
           </option>
           <option>Diaria (365)</option>
@@ -84,11 +85,12 @@ function App() {
 
         <span>Tipo de tasa deseada</span>
         <select
+          defaultValue={1}
           onChange={(e) => setTSalida(e.target.value)}
           className="form-select mb-3"
         >
-          <option disabled selected>
-            Seleccione
+          <option disabled hidden value={1}>
+            Seleccione 
           </option>
           <option>Diaria (365)</option>
           <option>Diaria (360)</option>
@@ -103,7 +105,6 @@ function App() {
           <span>{resultado}</span>
           {resultado !== "" ? "%" : "0.0%"}
         </h5>
-
       </div>
     </div>
   );
