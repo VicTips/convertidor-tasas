@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import logo from "../src/images/logo.png";
 
 function App() {
   const [number, setNumber] = useState("");
@@ -11,6 +12,10 @@ function App() {
   if (number !== "") {
     if (tIngresada === "Mensual") {
       tasaEA = ((1 + number / 100) ** 12 - 1) * 100;
+    } else if (tIngresada === "Diaria (365)") {
+      tasaEA = ((1 + number / 100) ** 365 - 1) * 100;
+    } else if (tIngresada === "Diaria (360)") {
+      tasaEA = ((1 + number / 100) ** 360 - 1) * 100;
     } else if (tIngresada === "Bimestral") {
       tasaEA = ((1 + number / 100) ** 6 - 1) * 100;
     } else if (tIngresada === "Trimestral") {
@@ -25,6 +30,10 @@ function App() {
   if (number !== "" && tasaEA !== "") {
     if (tSalida === "Mensual") {
       resultado = ((1 + tasaEA / 100) ** (1 / 12) - 1) * 100;
+    } else if (tSalida === "Diaria (365)") {
+      resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 100;
+    } else if (tSalida === "Diaria (360)") {
+      resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 100;
     } else if (tSalida === "Bimestral") {
       resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100;
     } else if (tSalida === "Trimestral") {
@@ -41,8 +50,9 @@ function App() {
   }
 
   return (
-    <div className="d-flex justify-content-center mt-5 specialfont">
-      <div className="d-flex flex-column">
+    <div className="d-flex justify-content-center screen-full">
+      <div className="bg-light p-5 d-flex flex-column my-auto shadow">
+        <img src={logo} alt="Logo VicTips" className="mb-3"/>
         <span>Ingrese la tasa de interés</span>
         <div className="input-group mb-3">
           <input
@@ -63,6 +73,8 @@ function App() {
           <option disabled selected>
             Seleccione
           </option>
+          <option>Diaria (365)</option>
+          <option>Diaria (360)</option>
           <option>Mensual</option>
           <option>Bimestral</option>
           <option>Trimestral</option>
@@ -78,6 +90,8 @@ function App() {
           <option disabled selected>
             Seleccione
           </option>
+          <option>Diaria (365)</option>
+          <option>Diaria (360)</option>
           <option>Mensual</option>
           <option>Bimestral</option>
           <option>Trimestral</option>
@@ -87,8 +101,9 @@ function App() {
 
         <h5 className="text-center">
           <span>{resultado}</span>
-          {resultado !== "" ? "%" : ""}
+          {resultado !== "" ? "%" : "0.0%"}
         </h5>
+
       </div>
     </div>
   );
