@@ -3,50 +3,66 @@ import { useState } from "react";
 import logo from "../src/images/logo.png";
 
 function App() {
-  const [number, setNumber] = useState("");
+  const [tasa, setTasa] = useState("");
   const [tIngresada, setTIngresada] = useState("");
   const [tSalida, setTSalida] = useState("");
+  const DIA365 = "Diaria (365)";
+  const DIA360 = "Diaria (360)";
+  const MES = "Mensual";
+  const BIMESTRE = "Bimestral";
+  const TRIMESTRE = "Trimestral";
+  const SEMESTRE = "Semestral";
+  const ANUAL = "Anual";
+  const tiposTasas = [
+    DIA365,
+    DIA360,
+    MES,
+    BIMESTRE,
+    TRIMESTRE,
+    SEMESTRE,
+    ANUAL,
+  ];
   let tasaEA = "";
   let resultado = "";
 
-  if (number !== "") {
-    if (tIngresada === "Mensual") {
-      tasaEA = ((1 + number / 100) ** 12 - 1) * 100;
-    } else if (tIngresada === "Diaria (365)") {
-      tasaEA = ((1 + number / 100) ** 365 - 1) * 100;
-    } else if (tIngresada === "Diaria (360)") {
-      tasaEA = ((1 + number / 100) ** 360 - 1) * 100;
-    } else if (tIngresada === "Bimestral") {
-      tasaEA = ((1 + number / 100) ** 6 - 1) * 100;
-    } else if (tIngresada === "Trimestral") {
-      tasaEA = ((1 + number / 100) ** 4 - 1) * 100;
-    } else if (tIngresada === "Semestral") {
-      tasaEA = ((1 + number / 100) ** 2 - 1) * 100;
-    } else if (tIngresada === "Anual") {
-      tasaEA = number;
+  if (tasa !== "") {
+    if (tIngresada === MES) {
+      tasaEA = ((1 + tasa / 100) ** 12 - 1) * 100;
+    } else if (tIngresada === DIA365) {
+      tasaEA = ((1 + tasa / 100) ** 365 - 1) * 100;
+    } else if (tIngresada === DIA360) {
+      tasaEA = ((1 + tasa / 100) ** 360 - 1) * 100;
+    } else if (tIngresada === BIMESTRE) {
+      tasaEA = ((1 + tasa / 100) ** 6 - 1) * 100;
+    } else if (tIngresada === TRIMESTRE) {
+      tasaEA = ((1 + tasa / 100) ** 4 - 1) * 100;
+    } else if (tIngresada === SEMESTRE) {
+      tasaEA = ((1 + tasa / 100) ** 2 - 1) * 100;
+    } else if (tIngresada === ANUAL) {
+      tasaEA = tasa;
     }
   }
 
-  if (number !== "" && tasaEA !== "") {
-    if (tSalida === "Mensual") {
+  if (tasa !== "" && tasaEA !== "") {
+    if (tSalida === MES) {
       resultado = ((1 + tasaEA / 100) ** (1 / 12) - 1) * 100;
-    } else if (tSalida === "Diaria (365)") {
+    } else if (tSalida === DIA365) {
       resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 100;
-    } else if (tSalida === "Diaria (360)") {
+    } else if (tSalida === DIA360) {
       resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 100;
-    } else if (tSalida === "Bimestral") {
+    } else if (tSalida === BIMESTRE) {
       resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100;
-    } else if (tSalida === "Trimestral") {
+    } else if (tSalida === TRIMESTRE) {
       resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 100;
-    } else if (tSalida === "Semestral") {
+    } else if (tSalida === SEMESTRE) {
       resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 100;
-    } else if (tSalida === "Anual") {
+    } else if (tSalida === ANUAL) {
       resultado = tasaEA;
     }
   }
 
   if (tIngresada === tSalida && tIngresada !== "") {
-    resultado = number;
+    resultado = tasa;
   }
 
   return (
@@ -59,8 +75,8 @@ function App() {
             required
             placeholder="2.5"
             className="text-center form-control"
-            onChange={(e) => setNumber(e.target.value)}
-            value={number}
+            onChange={(e) => setTasa(e.target.value)}
+            value={tasa}
           ></input>
           <span className="input-group-text">%</span>
         </div>
@@ -74,13 +90,9 @@ function App() {
           <option disabled hidden value={1}>
             Seleccione
           </option>
-          <option>Diaria (365)</option>
-          <option>Diaria (360)</option>
-          <option>Mensual</option>
-          <option>Bimestral</option>
-          <option>Trimestral</option>
-          <option>Semestral</option>
-          <option>Anual</option>
+          {tiposTasas.map((tipo, _) => (
+            <option>{tipo}</option>
+          ))}
         </select>
 
         <span>Tipo de tasa deseada</span>
@@ -90,15 +102,11 @@ function App() {
           className="form-select mb-3"
         >
           <option disabled hidden value={1}>
-            Seleccione 
+            Seleccione
           </option>
-          <option>Diaria (365)</option>
-          <option>Diaria (360)</option>
-          <option>Mensual</option>
-          <option>Bimestral</option>
-          <option>Trimestral</option>
-          <option>Semestral</option>
-          <option>Anual</option>
+          {tiposTasas.map((tipo, _) => (
+            <option>{tipo}</option>
+          ))}
         </select>
 
         <h5 className="text-center">
