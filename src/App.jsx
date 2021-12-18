@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import logo from "../src/images/logo.png";
+import { Logo } from "./components/Logo";
 
 function App() {
   const [tasa, setTasa] = useState("");
@@ -82,8 +82,8 @@ function App() {
   return (
     <div className="d-flex justify-content-center screen-full">
       <div className="bg-light p-5 d-flex flex-column my-auto shadow">
-        <img src={logo} alt="Logo VicTips" className="mb-3" />
-        <span>Ingrese la tasa de interés</span>
+        <Logo />
+        <span className="mt-3">Ingrese la tasa de interés</span>
         <div className="input-group mb-3">
           <input
             required
