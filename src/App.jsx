@@ -90,8 +90,8 @@ function App() {
           <option disabled hidden value={1}>
             Seleccione
           </option>
-          {tiposTasas.map((tipo, _) => (
-            <option>{tipo}</option>
+          {tiposTasas.map((tipo, indx) => (
+            <option key={indx}>{tipo}</option>
           ))}
         </select>
 
@@ -104,8 +104,8 @@ function App() {
           <option disabled hidden value={1}>
             Seleccione
           </option>
-          {tiposTasas.map((tipo, _) => (
-            <option>{tipo}</option>
+          {tiposTasas.map((tipo, indx) => (
+            <option key={indx}>{tipo}</option>
           ))}
         </select>
 
