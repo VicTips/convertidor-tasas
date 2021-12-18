@@ -6,6 +6,7 @@ function App() {
   const [tasa, setTasa] = useState("");
   const [tIngresada, setTIngresada] = useState("");
   const [tSalida, setTSalida] = useState("");
+
   const DIA365 = "Diaria (365)";
   const DIA360 = "Diaria (360)";
   const MES = "Mensual";
@@ -22,6 +23,19 @@ function App() {
     SEMESTRE,
     ANUAL,
   ];
+  function opcionesTasas() {
+    return (
+      <>
+        <option disabled hidden value={1}>
+          Seleccione
+        </option>
+        {tiposTasas.map((tipo, indx) => (
+          <option key={indx}>{tipo}</option>
+        ))}
+      </>
+    );
+  }
+
   let tasaEA = "";
   let resultado = "";
 
@@ -87,12 +101,7 @@ function App() {
           onChange={(e) => setTIngresada(e.target.value)}
           className="form-select mb-3"
         >
-          <option disabled hidden value={1}>
-            Seleccione
-          </option>
-          {tiposTasas.map((tipo, indx) => (
-            <option key={indx}>{tipo}</option>
-          ))}
+          {opcionesTasas()}
         </select>
 
         <span>Tipo de tasa deseada</span>
@@ -101,12 +110,7 @@ function App() {
           onChange={(e) => setTSalida(e.target.value)}
           className="form-select mb-3"
         >
-          <option disabled hidden value={1}>
-            Seleccione
-          </option>
-          {tiposTasas.map((tipo, indx) => (
-            <option key={indx}>{tipo}</option>
-          ))}
+          {opcionesTasas()}
         </select>
 
         <h5 className="text-center">
