@@ -87,6 +87,8 @@ function App() {
         <div className="input-group mb-3">
           <input
             required
+            type="number"
+            step="0.01"
             placeholder="2.5"
             className="text-center form-control"
             onChange={(e) => setTasa(e.target.value)}
