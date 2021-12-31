@@ -79,7 +79,7 @@ function App() {
   if (tIngresada === tSalida && tIngresada !== "" && !isNaN(tasa)) {
     resultado = tasa;
   }
-  console.log(tasa);
+
   return (
     <div className="d-flex justify-content-center screen-full">
       <div className="bg-light p-5 d-flex flex-column my-auto shadow">
