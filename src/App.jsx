@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { Logo } from "./components/Logo";
+import NumberFormat from "react-number-format";
 
 function App() {
   const [tasa, setTasa] = useState("");
@@ -39,7 +40,7 @@ function App() {
   let tasaEA = "";
   let resultado = "";
 
-  if (tasa !== "") {
+  if (tasa !== "" && !isNaN(tasa)) {
     if (tIngresada === MES) {
       tasaEA = ((1 + tasa / 100) ** 12 - 1) * 100;
     } else if (tIngresada === DIA365) {
@@ -75,30 +76,42 @@ function App() {
     }
   }
 
-  if (tIngresada === tSalida && tIngresada !== "") {
+  if (tIngresada === tSalida && tIngresada !== "" && !isNaN(tasa)) {
     resultado = tasa;
   }
-
+  console.log(tasa);
   return (
     <div className="d-flex justify-content-center screen-full">
       <div className="bg-light p-5 d-flex flex-column my-auto shadow">
         <Logo />
         <span className="mt-3">Ingrese la tasa de interés</span>
-        <div className="input-group mb-3">
+        <NumberFormat
+          // thousandsGroupStyle="thousand"
+          placeholder="1.8%"
+          displayType="input"
+          type="text"
+          className="text-center form-control"
+          thousandSeparator={true}
+          allowNegative={false}
+          isNumericString={true}
+          suffix="%"
+          onChange={(e) => setTasa(parseFloat(e.target.value))}
+          value={tasa}
+        />
+        {/* <div className="input-group mb-3">
           <input
             required
-            type="number"
-            step="0.01"
             placeholder="2.5"
             className="text-center form-control"
             onChange={(e) => setTasa(e.target.value)}
             value={tasa}
           ></input>
           <span className="input-group-text">%</span>
-        </div>
+        </div> */}
 
         <span>Tipo de tasa ingresada</span>
         <select
+          name="tIngresada"
           defaultValue={1}
           onChange={(e) => setTIngresada(e.target.value)}
           className="form-select mb-3"
@@ -108,6 +121,7 @@ function App() {
 
         <span>Tipo de tasa deseada</span>
         <select
+          name="tSalida"
           defaultValue={1}
           onChange={(e) => setTSalida(e.target.value)}
           className="form-select mb-3"
