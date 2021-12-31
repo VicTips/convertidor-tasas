@@ -90,7 +90,7 @@ function App() {
           placeholder="1.8%"
           displayType="input"
           type="text"
-          className="text-center form-control"
+          className="text-center form-control mb-3"
           thousandSeparator={true}
           allowNegative={false}
           isNumericString={true}
