@@ -67,6 +67,16 @@ function App() {
       tasaEA = ((1 + tasa / 100) ** 2 - 1) * 100;
     } else if (tIngresada === ANUAL) {
       tasaEA = tasa;
+    } else if (tIngresada === NDIA365) {
+      tasaEA = ((1 + tasa / 365 / 100) ** 365 - 1) * 100;
+    } else if (tIngresada === NDIA360) {
+      tasaEA = ((1 + tasa / 360 / 100) ** 360 - 1) * 100;
+    } else if (tIngresada === NBIMESTRE) {
+      tasaEA = ((1 + tasa / 6 / 100) ** 6 - 1) * 100;
+    } else if (tIngresada === NTRIMESTRE) {
+      tasaEA = ((1 + tasa / 4 / 100) ** 4 - 1) * 100;
+    } else if (tIngresada === NSEMESTRE) {
+      tasaEA = ((1 + tasa / 2 / 100) ** 2 - 1) * 100;
     }
   }
 
@@ -85,6 +95,16 @@ function App() {
       resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 100;
     } else if (tSalida === ANUAL) {
       resultado = tasaEA;
+    } else if (tSalida === NDIA365) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 100 * 365;
+    } else if (tSalida === NDIA360) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 100 * 360;
+    } else if (tSalida === NBIMESTRE) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100 * 6;
+    } else if (tSalida === NTRIMESTRE) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 100 * 4;
+    } else if (tSalida === NSEMESTRE) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 100 * 2;
     }
   }
 
