@@ -14,7 +14,13 @@ function App() {
   const BIMESTRE = "Bimestral";
   const TRIMESTRE = "Trimestral";
   const SEMESTRE = "Semestral";
-  const ANUAL = "Anual";
+  const ANUAL = "Efectiva anual";
+  const NDIA365 = "Nominal diaria (365)";
+  const NDIA360 = "Nominal diaria (360)";
+  const NMES = "Nominal mensual";
+  const NBIMESTRE = "Nominal bimestral";
+  const NTRIMESTRE = "Nominal trimestral";
+  const NSEMESTRE = "Nominal semestral";
   const tiposTasas = [
     DIA365,
     DIA360,
@@ -23,6 +29,12 @@ function App() {
     TRIMESTRE,
     SEMESTRE,
     ANUAL,
+    NDIA365,
+    NDIA360,
+    NMES,
+    NBIMESTRE,
+    NTRIMESTRE,
+    NSEMESTRE,
   ];
   function opcionesTasas() {
     return (
@@ -86,7 +98,6 @@ function App() {
         <Logo />
         <span className="mt-3">Ingrese la tasa de interés</span>
         <NumberFormat
-          // thousandsGroupStyle="thousand"
           placeholder="1.8%"
           displayType="input"
           type="text"
@@ -98,16 +109,6 @@ function App() {
           onChange={(e) => setTasa(parseFloat(e.target.value))}
           value={tasa}
         />
-        {/* <div className="input-group mb-3">
-          <input
-            required
-            placeholder="2.5"
-            className="text-center form-control"
-            onChange={(e) => setTasa(e.target.value)}
-            value={tasa}
-          ></input>
-          <span className="input-group-text">%</span>
-        </div> */}
 
         <span>Tipo de tasa ingresada</span>
         <select
