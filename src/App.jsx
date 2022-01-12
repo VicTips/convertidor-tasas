@@ -67,6 +67,8 @@ function App() {
       tasaEA = ((1 + tasa / 100) ** 2 - 1) * 100;
     } else if (tIngresada === ANUAL) {
       tasaEA = tasa;
+    } else if (tIngresada === NMES) {
+      tasaEA = ((1 + tasa / 12 / 100) ** 12 - 1) * 100;
     } else if (tIngresada === NDIA365) {
       tasaEA = ((1 + tasa / 365 / 100) ** 365 - 1) * 100;
     } else if (tIngresada === NDIA360) {
@@ -82,35 +84,44 @@ function App() {
 
   if (tasa !== "" && tasaEA !== "") {
     if (tSalida === MES) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 12) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 12) - 1;
     } else if (tSalida === DIA365) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 365) - 1;
     } else if (tSalida === DIA360) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 360) - 1;
     } else if (tSalida === BIMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 6) - 1;
     } else if (tSalida === TRIMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 4) - 1;
     } else if (tSalida === SEMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 100;
+      resultado = (1 + tasaEA / 100) ** (1 / 2) - 1;
     } else if (tSalida === ANUAL) {
-      resultado = tasaEA;
+      resultado = tasaEA / 100;
+    } else if (tSalida === NMES) {
+      resultado = ((1 + tasaEA / 100) ** (1 / 12) - 1) * 12;
     } else if (tSalida === NDIA365) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 100 * 365;
+      resultado = ((1 + tasaEA / 100) ** (1 / 365) - 1) * 365;
     } else if (tSalida === NDIA360) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 100 * 360;
+      resultado = ((1 + tasaEA / 100) ** (1 / 360) - 1) * 360;
     } else if (tSalida === NBIMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 100 * 6;
+      resultado = ((1 + tasaEA / 100) ** (1 / 6) - 1) * 6;
     } else if (tSalida === NTRIMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 100 * 4;
+      resultado = ((1 + tasaEA / 100) ** (1 / 4) - 1) * 4;
     } else if (tSalida === NSEMESTRE) {
-      resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 100 * 2;
+      resultado = ((1 + tasaEA / 100) ** (1 / 2) - 1) * 2;
     }
   }
 
   if (tIngresada === tSalida && tIngresada !== "" && !isNaN(tasa)) {
-    resultado = tasa;
+    resultado = tasa / 100;
   }
+
+  const DECIMALS = 14;
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "percent",
+    minimumSignificantDigits: DECIMALS,
+    maximumSignificantDigits: DECIMALS,
+  });
 
   return (
     <div className="d-flex justify-content-center screen-full">
@@ -132,27 +143,28 @@ function App() {
 
         <span>Tipo de tasa ingresada</span>
         <select
+          aria-label="tIngresada"
           name="tIngresada"
           defaultValue={1}
           onChange={(e) => setTIngresada(e.target.value)}
-          className="form-select mb-3"
+          className="form-select mb-3 text-center"
         >
           {opcionesTasas()}
         </select>
 
         <span>Tipo de tasa deseada</span>
         <select
+          aria-label="tSalida"
           name="tSalida"
           defaultValue={1}
           onChange={(e) => setTSalida(e.target.value)}
-          className="form-select mb-3"
+          className="form-select mb-3 text-center"
         >
           {opcionesTasas()}
         </select>
 
         <h5 className="text-center">
-          <span>{resultado}</span>
-          {resultado !== "" ? "%" : "0.0%"}
+          {resultado !== "" ? formatter.format(resultado) : "0.0%"}
         </h5>
       </div>
     </div>
