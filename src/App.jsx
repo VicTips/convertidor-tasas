@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import { Logo } from "./components/Logo";
 import NumberFormat from "react-number-format";
+import opcionesTasas from "./services/Options";
 
 function App() {
   const [tasa, setTasa] = useState("");
@@ -36,18 +37,6 @@ function App() {
     NTRIMESTRE,
     NSEMESTRE,
   ];
-  function opcionesTasas() {
-    return (
-      <>
-        <option disabled hidden value={1}>
-          Seleccione
-        </option>
-        {tiposTasas.map((tipo, indx) => (
-          <option key={indx}>{tipo}</option>
-        ))}
-      </>
-    );
-  }
 
   let tasaEA = "";
   let resultado = "";
@@ -149,7 +138,7 @@ function App() {
           onChange={(e) => setTIngresada(e.target.value)}
           className="form-select mb-3 text-center"
         >
-          {opcionesTasas()}
+          {opcionesTasas(tiposTasas)}
         </select>
 
         <span>Tipo de tasa deseada</span>
@@ -160,7 +149,7 @@ function App() {
           onChange={(e) => setTSalida(e.target.value)}
           className="form-select mb-3 text-center"
         >
-          {opcionesTasas()}
+          {opcionesTasas(tiposTasas)}
         </select>
 
         <h5 className="text-center">
